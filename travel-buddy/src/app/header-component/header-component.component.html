@@ -1,0 +1,34 @@
+<header>
+    <div class="px-3 py-2 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <!-- <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"> -->
+            <a routerLink="/tools" class="navbar-brand  align-items-center my-2 my-lg-0 me-lg-auto" href="#">
+            <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg> -->
+            <fa-icon [icon]="faPlaneDeparture"></fa-icon>
+          </a>
+  
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a routerLink="/tools" routerLinkActive="active" class="nav-link text-white align-items-center">
+                <fa-icon class="bi d-block mx-auto mb-1" [icon]="faScrewdriverWrench"></fa-icon>
+                Tools
+              </a>
+            </li>
+            <li>
+              <a routerLink="/todo" class="nav-link text-white">
+                <fa-icon class="bi d-block mx-auto mb-1" [icon]="faListCheck"></fa-icon>
+                Todo List
+              </a>
+            </li>
+            <li>
+              <a  class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"></svg>
+                Orders
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</header>
