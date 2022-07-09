@@ -1,1 +1,31 @@
 <p>currency-converter-component works!</p>
+
+<div class="container-sm">
+    <div class="row align-items-start">
+        <div class="col-4">
+            <label for="inputCurrency"><h6>GBP<fa-icon class="fa-icon" [icon]="faSterlingSign"></fa-icon></h6></label>
+            <input id="inputCurrency" 
+            required="true"
+            value="1" 
+            step=".01" 
+            type="number"
+            min=".01"
+            [(ngModel)]="inputAmount">
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col-4">
+            <label for="outputCurrency"><h6>USD<fa-icon class="fa-icon" [icon]="faDollarSign"></fa-icon></h6></label>
+            <input 
+            id="outputCurrency" 
+            readonly="true" 
+            type="number"
+            [(ngModel)]="outputAmount">
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col-4">
+            <button (click)="convertCurrency()">Convert</button>
+        </div>
+    </div>
+</div>
