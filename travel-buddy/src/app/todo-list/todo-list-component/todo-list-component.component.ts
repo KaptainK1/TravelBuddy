@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToDoListService } from './todo-list-service';
+import { TodoItem } from 'src/app/models/todo-item';
 
 @Component({
   selector: 'app-todo-list-component',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private todoListService: ToDoListService) { }
 
   ngOnInit(): void {
+  }
+
+  getTodoItems(): TodoItem [] {
+    return this.todoListService.todoItems;
+  }
+
+  onDelete(index :number){
+    console.log(index);
+    this.todoListService.deleteItem(index)
+
   }
 
 }

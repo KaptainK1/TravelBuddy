@@ -1,1 +1,14 @@
 <p>todo-list-component works!</p>
+
+<div *ngFor="let item of getTodoItems(); let i = index">
+    <p>{{item.title}}</p>
+    <p>{{item.description}}</p>
+    <p>{{item.duration}}</p>
+    <p>{{item.isDone}}</p>
+    <button>Edit</button>
+    <button
+    (click)="onDelete(i)"
+    >Delete</button>
+</div>
+
+<button>Add Todo Item</button>

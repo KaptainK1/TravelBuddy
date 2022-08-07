@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  currencyAPIKey: 'v6C8RwhALwmhFHW6Iqmm8FD7iXObvsBu'
 };
