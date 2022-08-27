@@ -8,13 +8,18 @@
                 <p>{{item.description}}</p>
                 <p>{{item.duration}}</p>
                 <p>{{item.isDone}}</p>
-                <a
+                <!-- <a
                 [routerLink]="['edit/', i]"
-                >Edit</a>
+                >Edit</a> -->
+                <button
+                (click)="onEdit(item)">Edit</button>
                 <button
                 (click)="onDelete(i)"
                 >Delete</button>
             </div>
+        </div>
+        <div *ngIf="showEdit">
+            <todo-list-edit-component [todoItem]="selectedItem"></todo-list-edit-component>
         </div>
         <div class="col-xs">
             <router-outlet></router-outlet>

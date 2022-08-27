@@ -14,7 +14,7 @@ export class CurrencyConverterComponent implements OnInit {
   faDollarSign = faDollarSign;
   faSterlingSign = faSterlingSign;
   outputAmount: number = 0.00;
-  inputAmount: number = 2.00;
+  inputAmount: number = 1.00;
 
   constructor(private currencyConverterService: CurrencyConverterService) { }
 
