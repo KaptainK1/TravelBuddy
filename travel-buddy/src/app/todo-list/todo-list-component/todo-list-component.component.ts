@@ -23,5 +23,8 @@ export class TodoListComponent implements OnInit {
     this.todoListService.deleteItem(index)
 
   }
+  onEdit(index :number){
+    console.log(index);
+  }
 
 }
