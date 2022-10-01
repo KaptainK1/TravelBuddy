@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using EntityFramework.Exceptions;
 using TravelBuddyApi.Model;
 
 namespace TravelBuddyApi.Repository
@@ -12,26 +13,29 @@ namespace TravelBuddyApi.Repository
             _dbContext = dbContext;
         }
 
-        public void DeleteTodoItem(long id)
+        public async Task<TodoItem> DeleteTodoItem(long id)
         {
             TodoItem item = _dbContext.TodoItems.Where(x => x.Id.Equals(id)).FirstOrDefault();
             if (item != null)
             {
                 _dbContext.Remove(item);
+                await _dbContext.SaveChangesAsync();
+                return item;
             }
+            return null;
         }
 
-        public void EditTodoItem(TodoItem todoItem)
+        public Task EditTodoItem(TodoItem todoItem)
         {
             throw new NotImplementedException();
         }
 
-        public TodoItem GetTodoItem(long id)
+        public async Task<TodoItem> GetTodoItem(long id)
         {
             return _dbContext.TodoItems.Where(x => x.Id.Equals(id)).FirstOrDefault();
         }
 
-        public void InsertTodoItem(TodoItem todoItem)
+        public Task InsertTodoItem(TodoItem todoItem)
         {
             throw new NotImplementedException();
         }
