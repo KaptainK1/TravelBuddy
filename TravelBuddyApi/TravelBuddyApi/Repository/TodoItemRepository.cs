@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using EntityFramework.Exceptions;
 using TravelBuddyApi.Model;
+using TravelBuddyApi.Exceptions;
 
 namespace TravelBuddyApi.Repository
 {
@@ -22,12 +23,21 @@ namespace TravelBuddyApi.Repository
                 await _dbContext.SaveChangesAsync();
                 return item;
             }
-            return null;
+            throw new EntityValidationException("Error Deleting", $"Cannot delete item with id {id}");
         }
 
-        public Task EditTodoItem(TodoItem todoItem)
+        public async Task EditTodoItem(TodoItem todoItem)
         {
-            throw new NotImplementedException();
+            var currentItem = _dbContext.TodoItems.Where (x => x.Id == todoItem.Id).FirstOrDefault();
+            if (currentItem != null)
+            {
+                currentItem.Title = todoItem.Title;
+                currentItem.Description = todoItem.Description;
+                currentItem.Duration = todoItem.Duration;
+                currentItem.IsDone = todoItem.IsDone;
+                await _dbContext.SaveChangesAsync();
+            }
+            throw new EntityValidationException("Error updating", $"Cannot update item with id {todoItem.Id}");
         }
 
         public async Task<TodoItem> GetTodoItem(long id)
@@ -35,9 +45,10 @@ namespace TravelBuddyApi.Repository
             return _dbContext.TodoItems.Where(x => x.Id.Equals(id)).FirstOrDefault();
         }
 
-        public Task InsertTodoItem(TodoItem todoItem)
+        public async Task InsertTodoItem(TodoItem todoItem)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(todoItem);
+            await _dbContext.SaveChangesAsync();
         }
 
         private bool disposed = false;
