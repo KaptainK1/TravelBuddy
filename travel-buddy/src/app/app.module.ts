@@ -13,7 +13,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToolsComponent } from './tools/tools.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoListEditComponent } from './todo-list/todo-list-edit/todo-list-edit.component';
+import { StoreModule } from '@ngrx/store';
+import { todoItemReducer } from './todo-list/todo-list/+state/todo-list.reducer';
 
+
+//primeng
+import { PanelModule } from 'primeng/panel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,11 @@ import { TodoListEditComponent } from './todo-list/todo-list-edit/todo-list-edit
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PanelModule,
+    BrowserAnimationsModule,
+    SplitterModule,
+    StoreModule.forRoot({todoItems: todoItemReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
