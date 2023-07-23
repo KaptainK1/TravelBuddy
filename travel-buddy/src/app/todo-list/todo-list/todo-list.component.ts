@@ -4,6 +4,7 @@ import { TodoItem } from 'src/app/models/todo-item';
 import { TodoListEditComponent } from '../todo-list-edit/todo-list-edit.component';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import  * as TodoActions from './+state/todo-list.actions';
 
 
 @Component({
@@ -21,11 +22,12 @@ export class TodoListComponent implements OnInit {
 
   constructor(private todoListService: ToDoListService,
     private store: Store<{todoItems: TodoItem[]}>) { 
-      this.todoItems$ = store.select('todoItems');
+      
     }
 
 
   ngOnInit(): void {
+    this.todoItems$ = this.store.select('todoItems');
   }
 
   getTodoItems(): TodoItem [] {
@@ -33,8 +35,7 @@ export class TodoListComponent implements OnInit {
   }
 
   onDelete(index :number){
-    console.log(index);
-    this.todoListService.deleteItem(index)
+    this.store.dispatch(TodoActions.deleteItem({index: index}))
 
   }
   onEdit(item :TodoItem){
@@ -42,8 +43,5 @@ export class TodoListComponent implements OnInit {
     this.showEdit = true;
     console.log(item);
   }
-  // onEdit(){
-  //   this.showEdit = true;
-  // }
 
 }

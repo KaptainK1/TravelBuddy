@@ -22,6 +22,7 @@ export const todoItemReducer = createReducer(
     on(actions.addItem, (state, {todoItem}) => ({...state, todoItem})),
     on(actions.deleteItem, (state, {index}) => {
         const items = [...state];
-        return items.splice(index, 1);
+        items.splice(index, 1);
+        return items;
     })
 )
