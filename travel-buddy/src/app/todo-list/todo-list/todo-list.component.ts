@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToDoListService } from './todo-list.service';
 import { TodoItem } from 'src/app/models/todo-item';
 import { TodoListEditComponent } from '../todo-list-edit/todo-list-edit.component';
 import { Observable } from 'rxjs';
@@ -20,7 +19,7 @@ export class TodoListComponent implements OnInit {
   public selectedItem: TodoItem = null;
   public todoItems$: Observable<TodoItem[]>;
 
-  constructor(private todoListService: ToDoListService,
+  constructor(
     private store: Store<{todoItems: TodoItem[]}>) { 
       
     }
@@ -28,10 +27,6 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoItems$ = this.store.select('todoItems');
-  }
-
-  getTodoItems(): TodoItem [] {
-    return this.todoListService.todoItems;
   }
 
   onDelete(index :number){
@@ -42,6 +37,12 @@ export class TodoListComponent implements OnInit {
     this.selectedItem = item;
     this.showEdit = true;
     console.log(item);
+  }
+
+  onCancel(isCancelled: boolean){
+    if(isCancelled){
+      this.showEdit = false;
+    }
   }
 
 }

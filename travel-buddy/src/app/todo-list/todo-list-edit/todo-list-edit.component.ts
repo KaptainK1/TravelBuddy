@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoItem } from 'src/app/models/todo-item';
 
 @Component({
@@ -11,6 +11,7 @@ export class TodoListEditComponent implements OnInit {
   constructor() { }
 
   @Input() todoItem: TodoItem;
+  @Output() isCancelled = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     console.log(this.todoItem);
@@ -21,7 +22,7 @@ export class TodoListEditComponent implements OnInit {
   }
 
   onCancel(){
-    console.log("in on cancel");
+    this.isCancelled.emit(true);
   }
 
 }
