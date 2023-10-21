@@ -9,7 +9,7 @@ namespace TravelBuddyApi.TravelBuddy.Todo
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        ITodoItemService _todoItemService;
+        readonly ITodoItemService _todoItemService;
 
         public TodoController(ITodoItemService todoItemService)
         {
@@ -20,7 +20,7 @@ namespace TravelBuddyApi.TravelBuddy.Todo
         [Route("api/[controller]/{id}")]
         public async Task<IActionResult> GetTodoItem([FromRoute] long id)
         {
-            var item = await _todoItemService.GetTodoItem(id);
+            var item =  _todoItemService.GetTodoItem(id);
             if (item == null)
             {
                 return NotFound();

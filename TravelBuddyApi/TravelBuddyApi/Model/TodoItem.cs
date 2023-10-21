@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TravelBuddyApi.Model
 {
+    [Table("todo_item")]
     public class TodoItem
 
     {

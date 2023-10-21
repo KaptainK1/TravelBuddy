@@ -6,25 +6,28 @@
                     <div class="row">
                         <div class="col-xs">
                             <div *ngFor="let item of todoItems$ | async; let i = index">
-                                <p>{{item.title}}</p>
-                                <p>{{item.description}}</p>
-                                <p>{{item.duration}}</p>
-                                <p>{{item.isDone}}</p>
-                                <!-- <a
-                                [routerLink]="['edit/', i]"
-                                >Edit</a> -->
-                                <button
-                                (click)="onEdit(item)">Edit</button>
-                                <button
-                                (click)="onDelete(i)"
-                                >Delete</button>
+                                <p-accordion [activeIndex]="0">
+                                    <p-accordionTab [header]="item.title">
+                                        <p>{{item.description}}</p>
+                                        <p>{{item.duration}}</p>
+                                        <p>{{item.isDone}}</p>
+                                        <button
+                                        (click)="onEdit(item)">Edit</button>
+                                        <a
+                                            [routerLink]="['edit/', i]"
+                                            >Edit</a>
+                                        <button
+                                        (click)="onDelete(i)"
+                                        >Delete</button>
+                                    </p-accordionTab>
+                                </p-accordion>
                             </div>
                         </div>
                         <div *ngIf="showEdit">
                             <todo-list-edit-component [todoItem]="selectedItem"></todo-list-edit-component>
                         </div>
                         <div class="col-xs">
-                            <router-outlet></router-outlet>
+                           
                         </div>
                     </div>
                 </div>
@@ -53,3 +56,5 @@
 
 
 <button>Add Todo Item</button>
+
+<router-outlet></router-outlet>

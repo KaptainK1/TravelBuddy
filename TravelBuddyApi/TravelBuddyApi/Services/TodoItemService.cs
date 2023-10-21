@@ -5,7 +5,7 @@ namespace TravelBuddyApi.Services
 {
     public class TodoItemService : ITodoItemService
     {
-        ITodoItemRepository _todoItemRepository;
+        readonly ITodoItemRepository _todoItemRepository;
 
         public TodoItemService(ITodoItemRepository todoItemRepository)
         {
@@ -22,9 +22,9 @@ namespace TravelBuddyApi.Services
             return null;
         }
 
-        public async Task<TodoItem> GetTodoItem(long id)
+        public TodoItem GetTodoItem(long id)
         {
-            return await _todoItemRepository.GetTodoItem(id);
+            return _todoItemRepository.GetTodoItem(id);
         }
     }
 }

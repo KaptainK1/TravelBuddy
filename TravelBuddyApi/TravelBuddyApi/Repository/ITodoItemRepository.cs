@@ -5,7 +5,7 @@ namespace TravelBuddyApi.Repository
     public interface ITodoItemRepository : IDisposable
     {
         Task InsertTodoItem(TodoItem todoItem);
-        Task<TodoItem> GetTodoItem(long id);
+        TodoItem GetTodoItem(long id);
         Task<TodoItem> DeleteTodoItem(long id);
         Task EditTodoItem(TodoItem todoItem);
     }

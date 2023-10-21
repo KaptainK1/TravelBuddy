@@ -4,7 +4,7 @@ namespace TravelBuddyApi.Services
 {
     public interface ITodoItemService
     {
-        Task<TodoItem> GetTodoItem(long id);
+        TodoItem GetTodoItem(long id);
         Task<TodoItem> DeleteTodoItem(long id);
 
 

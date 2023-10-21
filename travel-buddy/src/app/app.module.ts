@@ -22,6 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PanelModule } from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplitterModule } from 'primeng/splitter';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SplitterModule } from 'primeng/splitter';
     PanelModule,
     BrowserAnimationsModule,
     SplitterModule,
+    AccordionModule,
     StoreModule.forRoot({todoItems: todoItemReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

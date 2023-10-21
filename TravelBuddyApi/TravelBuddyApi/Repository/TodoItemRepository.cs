@@ -7,7 +7,7 @@ namespace TravelBuddyApi.Repository
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        private TodoContext _dbContext;
+        private readonly TodoContext _dbContext;
 
         public TodoItemRepository (TodoContext dbContext)
         {
@@ -16,7 +16,7 @@ namespace TravelBuddyApi.Repository
 
         public async Task<TodoItem> DeleteTodoItem(long id)
         {
-            TodoItem item = _dbContext.TodoItems.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            TodoItem item = _dbContext.TodoItem.Where(x => x.Id.Equals(id)).First();
             if (item != null)
             {
                 _dbContext.Remove(item);
@@ -28,7 +28,7 @@ namespace TravelBuddyApi.Repository
 
         public async Task EditTodoItem(TodoItem todoItem)
         {
-            var currentItem = _dbContext.TodoItems.Where (x => x.Id == todoItem.Id).FirstOrDefault();
+            var currentItem = _dbContext.TodoItem.Where (x => x.Id == todoItem.Id).FirstOrDefault();
             if (currentItem != null)
             {
                 currentItem.Title = todoItem.Title;
@@ -40,9 +40,9 @@ namespace TravelBuddyApi.Repository
             throw new EntityValidationException("Error updating", $"Cannot update item with id {todoItem.Id}");
         }
 
-        public async Task<TodoItem> GetTodoItem(long id)
+        public TodoItem GetTodoItem(long id)
         {
-            return _dbContext.TodoItems.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            return _dbContext.TodoItem.Where(x => x.Id.Equals(id)).First();
         }
 
         public async Task InsertTodoItem(TodoItem todoItem)
