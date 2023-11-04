@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using System.Reflection.Metadata;
 using System.Security.Principal;
 using TravelBuddyApi.Model;
 
@@ -14,6 +15,15 @@ namespace TravelBuddyApi.Repository
         {
             modelBuilder.HasDefaultSchema("TravelBuddyDB");
             modelBuilder.HasPostgresEnum<RoleType>();
+
+            //modelBuilder.Entity<Principal>()
+            //            .HasMany(p => p.TodoItems)
+            //            .WithOne(p => p.Principal)
+            //            .HasForeignKey(e => e.PrincipalId);
+            //modelBuilder.Entity<TodoItem>()
+            //            .HasOne(t => t.Principal)
+            //            .WithMany(t => t.TodoItems)
+            //            .HasForeignKey(t => t.PrincipalId);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace TravelBuddyApi.Repository
 
         public TodoItem GetTodoItem(long id)
         {
-            return _dbContext.TodoItem.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            return _dbContext.TodoItem.Where(x => x.Id.Equals(id)).Include(p => p.Principal).FirstOrDefault();
         }
 
         public async Task InsertTodoItem(TodoItem todoItem)

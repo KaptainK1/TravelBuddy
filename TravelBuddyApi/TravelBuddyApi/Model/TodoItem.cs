@@ -26,5 +26,12 @@ namespace TravelBuddyApi.Model
 
         [Column("is_done")]
         public bool IsDone { get; set; }
+
+
+        [Column("principal_id")]
+        public long PrincipalId { get; set; }
+
+        [ForeignKey(nameof(PrincipalId))]
+        public virtual Principal Principal { get; set; }
     }
 }

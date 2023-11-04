@@ -18,7 +18,7 @@ namespace TravelBuddyApi.TravelBuddy.Todo
 
         [HttpGet]
         [Route("api/[controller]/{id}")]
-        public async Task<IActionResult> GetTodoItem([FromRoute] long id)
+        public IActionResult GetTodoItem([FromRoute] long id)
         {
             var item =  _todoItemService.GetTodoItem(id);
             if (item == null)
