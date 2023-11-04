@@ -8,18 +8,23 @@ namespace TravelBuddyApi.Model
 
     {
         [Key]
+        [Column("id")]
         public long Id { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string Title { get; set; }
+        [Column("title")]
+        public required string Title { get; set; }
 
         [Required]
         [MaxLength(500)]
-        public string Description { get; set; }
+        [Column("description")]
+        public required string Description { get; set; }
 
+        [Column("duration")]
         public decimal Duration { get; set; }
 
+        [Column("is_done")]
         public bool IsDone { get; set; }
     }
 }

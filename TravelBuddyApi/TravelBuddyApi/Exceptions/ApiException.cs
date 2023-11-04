@@ -1,15 +1,15 @@
-﻿namespace TravelBuddyApi.Exceptions
+﻿using System.Net;
+
+namespace TravelBuddyApi.Exceptions
 {
     public class ApiException : Exception
     {
-        public Dictionary<string,string> ErrorDetails { get; set; }
+        public Dictionary<int,string> ErrorDetails { get; set; }
+        public int ErrorCode { get; set; }
 
-        public ApiException(string title, string message) : base(message)
+        public ApiException(HttpStatusCode error, string message) : base(message)
         {
-            ErrorDetails = new Dictionary<string, string>();
-            ErrorDetails["title"] = title;
-            ErrorDetails["message"] = message;
-
+            this.ErrorCode = (int)error;
         }
     }
 }

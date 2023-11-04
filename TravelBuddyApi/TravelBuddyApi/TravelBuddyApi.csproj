@@ -9,8 +9,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\Mapping\**" />
+    <Content Remove="Model\Mapping\**" />
+    <EmbeddedResource Remove="Model\Mapping\**" />
+    <None Remove="Model\Mapping\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Dapper" Version="2.1.15" />
     <PackageReference Include="EntityFrameworkCore.Exceptions.Common" Version="6.0.3" />
     <PackageReference Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
@@ -32,8 +40,5 @@
 
   <ItemGroup>
     <None Remove="Model\Mapping\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Mapping\" />
   </ItemGroup>
 </Project>

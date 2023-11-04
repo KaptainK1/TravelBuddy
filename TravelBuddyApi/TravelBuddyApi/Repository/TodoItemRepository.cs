@@ -2,6 +2,7 @@
 using EntityFramework.Exceptions;
 using TravelBuddyApi.Model;
 using TravelBuddyApi.Exceptions;
+using System.Net;
 
 namespace TravelBuddyApi.Repository
 {
@@ -23,7 +24,7 @@ namespace TravelBuddyApi.Repository
                 await _dbContext.SaveChangesAsync();
                 return item;
             }
-            throw new EntityValidationException("Error Deleting", $"Cannot delete item with id {id}");
+            throw new EntityValidationException(HttpStatusCode.Conflict, $"Cannot delete item with id {id}");
         }
 
         public async Task EditTodoItem(TodoItem todoItem)
@@ -37,12 +38,12 @@ namespace TravelBuddyApi.Repository
                 currentItem.IsDone = todoItem.IsDone;
                 await _dbContext.SaveChangesAsync();
             }
-            throw new EntityValidationException("Error updating", $"Cannot update item with id {todoItem.Id}");
+            throw new EntityValidationException(HttpStatusCode.BadRequest, $"Cannot update item with id {todoItem.Id}");
         }
 
         public TodoItem GetTodoItem(long id)
         {
-            return _dbContext.TodoItem.Where(x => x.Id.Equals(id)).First();
+            return _dbContext.TodoItem.Where(x => x.Id.Equals(id)).FirstOrDefault();
         }
 
         public async Task InsertTodoItem(TodoItem todoItem)

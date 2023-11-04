@@ -1,4 +1,6 @@
-﻿using TravelBuddyApi.Model;
+﻿using System.Net;
+using TravelBuddyApi.Exceptions;
+using TravelBuddyApi.Model;
 using TravelBuddyApi.Repository;
 
 namespace TravelBuddyApi.Services
@@ -19,7 +21,7 @@ namespace TravelBuddyApi.Services
             {
                 return await _todoItemRepository.DeleteTodoItem(id);
             }
-            return null;
+            throw new ApiException(HttpStatusCode.BadRequest, "Todo Item does not exist.");
         }
 
         public TodoItem GetTodoItem(long id)

@@ -1,8 +1,10 @@
-﻿namespace TravelBuddyApi.Exceptions
+﻿using System.Net;
+
+namespace TravelBuddyApi.Exceptions
 {
     public class EntityValidationException : ApiException
     {
-        public EntityValidationException(string title, string message) : base(title, message)
+        public EntityValidationException(HttpStatusCode error, string message) : base(error, message)
         {
         }
     }
