@@ -1,6 +1,23 @@
--- DROP SCHEMA "TravelBuddyDB";
+-- "TravelBuddyDB".todo_item definition
 
-CREATE SCHEMA "TravelBuddyDB" AUTHORIZATION appuser;
+-- Drop table
+
+-- DROP TABLE "TravelBuddyDB".todo_item;
+
+CREATE TABLE "TravelBuddyDB".todo_item (
+	id serial4 NOT NULL,
+	title text NOT NULL,
+	description text NOT NULL,
+	duration numeric NOT NULL,
+	is_done bool NOT NULL,
+	principal_id serial4 NOT NULL,
+	CONSTRAINT todo_item_pkey PRIMARY KEY (id)
+);
+
+
+-- "TravelBuddyDB".todo_item foreign keys
+
+ALTER TABLE "TravelBuddyDB".todo_item ADD CONSTRAINT fk_principal FOREIGN KEY (principal_id) REFERENCES "TravelBuddyDB".principal(id) ON DELETE CASCADE;
 
 -- "TravelBuddyDB".principal definition
 
@@ -10,25 +27,10 @@ CREATE SCHEMA "TravelBuddyDB" AUTHORIZATION appuser;
 
 CREATE TABLE "TravelBuddyDB".principal (
 	id serial4 NOT NULL,
+	username text NOT NULL,
 	email text NOT NULL,
 	"password" text NOT NULL,
+	role_type "TravelBuddyDB"."principal_role_type" NOT NULL DEFAULT 'regular'::"TravelBuddyDB".principal_role_type,
 	CONSTRAINT principal_email_key UNIQUE (email),
 	CONSTRAINT principal_pkey PRIMARY KEY (id)
-);
-
-
-
--- "TravelBuddyDB".todo_item definition
-
--- Drop table
-
--- DROP TABLE "TravelBuddyDB".todo_item;
-
-CREATE TABLE "TravelBuddyDB".todo_item (
-	id int8 NOT NULL,
-	title text NOT NULL,
-	description text NOT NULL,
-	duration numeric NOT NULL,
-	is_done bool NOT NULL,
-	CONSTRAINT todo_item_pkey PRIMARY KEY (id)
 );
