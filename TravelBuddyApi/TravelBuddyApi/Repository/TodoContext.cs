@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using System.Reflection.Metadata;
-using System.Security.Principal;
+﻿using Microsoft.EntityFrameworkCore;
 using TravelBuddyApi.Model;
-using NJsonSchema.Infrastructure;
 
 namespace TravelBuddyApi.Repository
 {

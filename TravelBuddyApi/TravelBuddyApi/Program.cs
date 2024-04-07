@@ -1,12 +1,12 @@
-using Microsoft.EntityFrameworkCore;
 using TravelBuddyApi.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using TravelBuddyApi.Services;
-using Npgsql;
 using TravelBuddyApi.Model;
 using TravelBuddyApi.Exceptions;
+using Npgsql;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 

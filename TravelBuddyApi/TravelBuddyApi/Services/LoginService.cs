@@ -32,7 +32,7 @@ namespace TravelBuddyApi.Services
                 return user;
             } else
             {
-                throw new ApiException(HttpStatusCode.BadRequest, "User is not authorized");
+                throw new ApiException(HttpStatusCode.Unauthorized, "Invalid User Name or Password");
             }
             
             
