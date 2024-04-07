@@ -9,32 +9,19 @@ using TravelBuddyApi.Model;
 using TravelBuddyApi.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//setup db
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("TravelBuddy"));
+dataSourceBuilder.MapEnum<RoleType>();
+var dataSource = dataSourceBuilder.Build();
+
+builder.Services.AddDbContext<TodoContext>(o =>
+     o.UseNpgsql(dataSource)
+);
+
 var config = builder.Configuration;
 
-// Add services to the container.
-
-//builder.Services.AddAuthentication(x =>
-//{
-//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(x =>
-//{
-//    x.SaveToken = true;
-
-//    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-//    {
-//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
-//        ValidateLifetime = true,
-//        ValidateIssuerSigningKey = true
-//    };
-
-//});
-
-
-builder.Services.AddAuthorization();
-
-
+//add services, controllers, repos
 builder.Services.AddControllers();
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
@@ -45,14 +32,26 @@ builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("TravelBuddy"));
-dataSourceBuilder.MapEnum<RoleType>();
-var dataSource = dataSourceBuilder.Build();
+//setup auth
+var secretKey = Encoding.ASCII.GetBytes(config.GetValue<string>("SecretKey"));
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
 
-builder.Services.AddDbContext<TodoContext>(o => 
-     o.UseNpgsql(dataSource)
-);
-
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+        ValidateLifetime = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 var app = builder.Build();
 

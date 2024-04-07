@@ -5,8 +5,8 @@ namespace TravelBuddyApi.Model
     public enum RoleType
     {
         [Description("regular")]
-        Regular = 1,
+        REGULAR,
         [Description("admin")]
-        Admin
+        ADMIN
     }
 }

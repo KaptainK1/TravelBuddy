@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBuddyApi.Model;
 using TravelBuddyApi.Services;
@@ -6,6 +7,7 @@ using TravelBuddyApi.Services;
 namespace TravelBuddyApi.TravelBuddy.Todo
 {
     [ApiController]
+    //[Authorize]
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {

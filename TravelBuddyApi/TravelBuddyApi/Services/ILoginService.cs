@@ -4,6 +4,6 @@ namespace TravelBuddyApi.Services
 {
     public interface ILoginService
     {
-        Task<bool> ValidateUser(LoginRequest loginRequest);
+        Task<Principal> ValidateUser(LoginRequest loginRequest);
     }
 }

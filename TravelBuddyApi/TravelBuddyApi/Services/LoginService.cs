@@ -14,22 +14,22 @@ namespace TravelBuddyApi.Services
         {
             _loginRepository = loginRepository;
         }
-        public async Task<bool> ValidateUser(LoginRequest loginRequest)
+        public async Task<Principal> ValidateUser(LoginRequest loginRequest)
         {
             var user = await _loginRepository.ValidateUser(loginRequest);
 
             if (user != null)
             {
-                //var claims = new List<Claim>()
-                //{
-                //    new Claim(ClaimTypes.Email, user.Email),
-                //    new Claim(ClaimTypes.Name, user.UserName)
-                //};
 
-                //var identity = new ClaimsIdentity(claims, "MyCookieAuth");
-                //ClaimsPrincipal principal = new ClaimsPrincipal(identity);
-                //await HttpContext
-                return true;
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.RoleType.ToString())
+                };
+
+                user.Claims = claims;
+                return user;
             } else
             {
                 throw new ApiException(HttpStatusCode.BadRequest, "User is not authorized");
